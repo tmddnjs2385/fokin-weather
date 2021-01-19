@@ -6,6 +6,7 @@ import Weather from "./Weather";
 import axios from "axios";
 
 
+
 const API_KEY = "dc448be3cb7f45bc19dd4ce9b4a1040b";
 
 export default class extends React.Component {
@@ -32,6 +33,7 @@ export default class extends React.Component {
         data
 
       } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`);
+
       console.log(data);
 
       const { weather, main } = data;
@@ -85,6 +87,8 @@ export default class extends React.Component {
     const { isLoading, temperature, condition } = this.state;
 
     console.log(isLoading)
+
+    console.log(condition)
 
     return isLoading ? (<Loading />) : (<Weather temperature={Math.round(temperature)} condition={condition} />)
 

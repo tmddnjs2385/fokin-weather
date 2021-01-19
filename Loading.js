@@ -1,10 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, StatusBar } from "react-native";
 
 export default function Loading() {
-    return <View style={styles.container}>
-        <Text style={styles.text}>Getting the fucking wether</Text>
-    </View>
+
+    return (
+
+        <View style={styles.container}>
+            {/* <StatusBar barStyle="dark-content" /> */}
+            <Text style={styles.text}>키뮤의 하루가 시작됩니다~!ㄴ</Text>
+        </View>)
 }
 
 const styles = StyleSheet.create({
