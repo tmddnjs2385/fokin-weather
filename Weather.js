@@ -7,52 +7,59 @@ import { LinearGradient } from "expo-linear-gradient";
 const weatherOptions = {
 
     Thunderstorm: {
-        iconName: "weather-hail",
-        gradient: ["4DA0B0", "#D39D38"]
 
-    }, Drizzle: {
+        iconName: "weather-lightning",
+        gradient: ["#373B44", "#4286f4"]
+
+
+    },
+
+    Snow: {
+        iconName: "weather-snowy",
+        gradient: ["#7DE2FC", "#B9B6E5"]
+    },
+    Drizzle: {
         iconName: "weather-hail",
-        gradient: ["4DA0B0", "#D39D38"]
+        gradient: ["#89F7FE", "#66A6FF"]
 
     }, Rain: {
         iconName: "weather-hail",
         gradient: ["4DA0B0", "#D39D38"]
 
-    }, Snow: {
-        iconName: "weather-hail",
-        gradient: ["4DA0B0", "#D39D38"]
+    },
 
-    }, Atmosphere: {
+    Atmosphere: {
         iconName: "weather-hail",
-        gradient: ["4DA0B0", "#D39D38"]
+        gradient: ["#89F7FE", "#66A6FF"]
 
-    }, Clear: {
-        iconName: "weather-hail",
-        gradient: ["4DA0B0", "#D39D38"]
+    },
 
-    }, Clouds: {
-        iconName: "weather-hail",
+    Clouds: {
+        iconName: "weather-cloudy",
         gradient: ["4DA0B0", "#D39D38"]
 
     }, Haze: {
-        iconName: "weather-hail",
-        gradient: ["4DA0B0", "#D39D38"]
+        iconName: "weather-cloudy",
+        gradient: ["#D7D2CC", "#304352"]
 
     }, Mist: {
         iconName: "weather-hail",
-        gradient: ["4DA0B0", "#D39D38"]
+        gradient: ["#4DA0B0", "#D39D38"]
 
     }, Dust: {
         iconName: "weather-hail",
-        gradient: ["4DA0B0", "#D39D38"]
+        gradient: ["#4DA0B0", "#D39D38"],
+        title: "Dusty",
+        subtitle: "Thanks a lot china"
 
     },
 
     Clear: {
 
-        iconName: "weather-hail",
-        gradient: ["#4DA0B0", "#D39D38"]
-
+        iconName: "weather-sunny",
+        gradient: ["#4DA0B0", "#D39D38"],
+        title: "Nice Weather",
+        subtitle: "Let's go outside~!"
     }
 
 }
@@ -62,11 +69,19 @@ export default function Weather(props) {
 
         <LinearGradient colors={weatherOptions[props.condition].gradient} style={styles.container}>
             {/* <StatusBar barStyle="light-content" /> */}
+
             <View style={styles.halfContainer}>
                 <MaterialCommunityIcons size={96} name={weatherOptions[props.condition].iconName} color="white" />
-                <Text style={styles.temperature}>{props.temperature}¡Æ</Text>
+                <Text style={styles.temperature}>{props.temperature}</Text>
             </View>
-            <View styles={styles.halfContainer} />
+
+            <View style={styles.halfContainer} >
+
+                <Text style={styles.title}>{weatherOptions[props.condition].title}</Text>
+
+                <Text style={styles.subtitle}>{weatherOptions[props.condition].subtitle}</Text>
+
+            </View>
 
         </LinearGradient >
 
@@ -96,5 +111,28 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center"
+    },
+
+    title: {
+
+        color: "white",
+        fontSize: 34,
+        fontWeight: "300",
+        marginBottom: 10
+
+    },
+
+    subtitle: {
+
+        fontWeight: "600",
+        color: "white",
+        fontSize: 24
+
+    },
+
+    textContainer: {
+        paddingVertical: 20,
+        alignItems: "flex-start"
     }
+
 });

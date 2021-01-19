@@ -7,7 +7,7 @@ export default function Loading() {
 
         <View style={styles.container}>
             {/* <StatusBar barStyle="dark-content" /> */}
-            <Text style={styles.text}>키뮤의 하루가 시작됩니다~!ㄴ</Text>
+            <Text style={styles.text}>Let's start KIMU day</Text>
         </View>)
 }
 
