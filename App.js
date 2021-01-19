@@ -2,9 +2,9 @@ import React from "react";
 import { Alert } from "react-native";
 import Loading from "./Loading";
 import * as Location from "expo-location";
-
-import axios from "axios";
 import Weather from "./Weather";
+import axios from "axios";
+
 
 const API_KEY = "dc448be3cb7f45bc19dd4ce9b4a1040b";
 
@@ -12,29 +12,39 @@ export default class extends React.Component {
 
   state = {
 
-    isLoading: true
+    isLoading: true,
+    condition: "",
+    temperature: 0
+
+
 
   };
 
-  getWeather = async (latitude, longtitude) => {
+  getWeather = async (latitude, longitude) => {
+
+
+
+
     try {
 
-      latitude = 33;
-      longtitude = 127;
+      const {
 
-      const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longtitude}&appid=${API_KEY}`);
+        data
 
+      } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`);
       console.log(data);
 
-      this.setState({ isLoading: false, temp: data.main.temp });
+      const { weather, main } = data;
 
-    } catch (error) {
+      console.log(weather[0].main);
 
-      console.log("data error");
+      this.setState({ isLoading: false, condition: weather[0].main, temperature: main.temp });
+
+    } catch {
+
+      console.log("data error?");
 
     }
-
-
 
   }
 
@@ -44,16 +54,15 @@ export default class extends React.Component {
 
     try {
 
-
       await Location.requestPermissionsAsync();
 
       const { coords: {
-        latitude, longtitude
+        latitude, longitude
       } } = await Location.getCurrentPositionAsync();
 
-      this.getWeather(latitude, longtitude);
+      console.log(latitude, longitude);
 
-
+      this.getWeather(latitude, longitude);
 
     } catch (error) {
 
@@ -73,9 +82,11 @@ export default class extends React.Component {
 
   render() {
 
-    const { isLoading, temp } = this.state;
+    const { isLoading, temperature, condition } = this.state;
 
-    return isLoading ? <Loading /> : <Weather temp={Math.round(temp)} />
+    console.log(isLoading)
+
+    return isLoading ? (<Loading />) : (<Weather temperature={Math.round(temperature)} condition={condition} />)
 
 
   }
